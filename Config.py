@@ -1,5 +1,5 @@
 import os
-# ============ General settings ============
+# =========  General settings ========
 # Local directory where the persistent vector store (Chroma) is saved
 PERSIST_DIR = "chroma_db"
 # Name of the collection inside the Chroma database
@@ -18,7 +18,7 @@ LLM_MODEL = "gpt-4o-mini"
 LLM_TEMPERATURE = 0.2
 # Number of chunks the retriever returns to build the answer from
 RETRIEVER_TOP_K = 4
-# Default Wikipedia language (e.g. "en", "ar")
+# Default Wikipedia language (  "en", "ar")
 WIKI_LANGS = ["ar", "en"]
 def check_api_key():
     # Make sure the OpenAI API key is set before running anything that needs a model.
