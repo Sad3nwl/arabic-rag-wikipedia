@@ -1,6 +1,6 @@
 """
 ingest.py
----------
+--------
 Handles the first stages of the pipeline (offline — runs once, or whenever you want
 to refresh the data):
   1. Fetch articles from Wikipedia
