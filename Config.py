@@ -1,3 +1,4 @@
+#made by: sad3wnl 
 import os
 # =========  General settings ========
 # Local directory where the persistent vector store (Chroma) is saved
@@ -21,7 +22,7 @@ RETRIEVER_TOP_K = 4
 # Default Wikipedia language (  "en", "ar")
 WIKI_LANGS = ["ar", "en"]
 def check_api_key():
-    # Make sure the OpenAI API key is set before running anything that needs a model.
+# Make sure the OpenAI API key is set before running anything that needs a model.
     if not os.environ.get("OPENAI_API_KEY"):
         raise EnvironmentError(
             "You must set the OPENAI_API_KEY environment variable before running this.\n"
