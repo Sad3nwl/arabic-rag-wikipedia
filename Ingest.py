@@ -3,7 +3,7 @@ ingest.py
 --------
 Handles the first stages of the pipeline (offline — runs once, or whenever you want
 to refresh the data):
-  1. Fetch articles from Wikipedia
+1. Fetch articles from Wikipedia
   """
 import wikipedia
 from langchain.schema import Document
@@ -50,7 +50,6 @@ def fetch_wikipedia_pages(topics: list[str], langs: list[str] = WIKI_LANGS) -> l
     return documents
 if __name__ == "__main__":
     # Quick sanity check before moving on
-    # "الذكاء الاصطناعي" exists in Arabic, "Quantum supremacy" likely only in English
     sample_docs = fetch_wikipedia_pages(["الذكاء الاصطناعي", "Quantum supremacy"])
     for d in sample_docs:
         print("-", d.metadata["source"], f"[{d.metadata['lang']}]", "->", d.metadata["url"])
