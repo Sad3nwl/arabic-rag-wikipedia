@@ -1,10 +1,7 @@
-"""
-ingest.py
---------
-Handles the first stages of the pipeline (offline — runs once, or whenever you want
+
+"""Handles the first stages of the pipeline (offline — runs once, or whenever you want
 to refresh the data):
-1. Fetch articles from Wikipedia
-  """
+1. Fetch articles from Wikipedia """
 import wikipedia
 from langchain.schema import Document
 from Config import WIKI_LANGS
