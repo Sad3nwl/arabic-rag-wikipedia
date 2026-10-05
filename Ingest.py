@@ -31,6 +31,7 @@ def fetch_wikipedia_pages(topics: list[str], langs: list[str] = WIKI_LANGS) -> l
     for topic in topics:
         page = None
         used_lang = None
+        # أنك طلبت تدعم عربي + إنجليزي مع بعض، فكان لازم شكل "جرب هاي، ولو فشلت جرب اللي بعدها" — هيك صمم اللوب
         for lang in langs:
             page = _fetch_single_page(topic, lang)
             if page is not None:
