@@ -5,6 +5,7 @@ to refresh the data):
 import wikipedia
 from langchain.schema import Document
 from Config import WIKI_LANGS
+# جيب صفحة وحدة بلغة وحدة
 def _fetch_single_page(topic: str, lang: str):
     """
     Tries to fetch one article in one language.
@@ -19,6 +20,7 @@ def _fetch_single_page(topic: str, lang: str):
         return wikipedia.page(e.options[0], auto_suggest=False)
     except wikipedia.exceptions.PageError:
         return None
+#     جرب كل اللغات لموضوع معين لحد ما تلاقي نتيجة
 def fetch_wikipedia_pages(topics: list[str], langs: list[str] = WIKI_LANGS) -> list[Document]:
     """
     Takes a list of topics and returns a list of LangChain Documents.
