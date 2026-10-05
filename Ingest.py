@@ -46,6 +46,7 @@ def fetch_wikipedia_pages(topics: list[str], langs: list[str] = WIKI_LANGS) -> l
                 metadata={"source": page.title, "url": page.url, "lang": used_lang},
             )
         )
+
         print(f"Fetched: {page.title} [{used_lang}] ({len(page.content)} chars)")
     return documents
 if __name__ == "__main__":
