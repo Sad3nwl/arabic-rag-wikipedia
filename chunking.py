@@ -20,9 +20,12 @@ def split_documents(documents: list[Document]) -> list[Document]:
         chunk_size=CHUNK_SIZE,
         # كل جزء بياخد آخر ١٠٠ حرف من الجزء اللي قبله (عشان ما نقطع جملة مهمة نص نص وتضيع)
         chunk_overlap=CHUNK_OVERLAP,
-        #
+        #ترتيب أولوية "أماكن القطع المفضلة": فقرة كاملة (\n\n) → سطر جديد (\n) → نهاية جملة (. ) → مسافة (" ") → أي مكان ("").
         separators=["\n\n", "\n", ". ", " ", ""],
     )
+    # تقطع النص حسب الـ separators
+    # تنسخ نفس الـ metadata تبع كل مقالة أصلية لكل جزء طلع منها — هيك ما بتفقد معرفة "هاد الجزء جاي من وين"
     chunks = splitter.split_documents(documents)
+    # طباعة بس عشان تتابع (كم مقالة دخلت، كم جزء طلع)، وبعدين إرجاع اللستة النهائية للي استدعى الدالة.
     print(f" Split {len(documents)} article(s) into {len(chunks)} chunk(s)")
     return chunks
