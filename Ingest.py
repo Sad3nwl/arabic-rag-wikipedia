@@ -16,7 +16,7 @@ def _fetch_single_page(topic: str, lang: str):
         return wikipedia.page(topic, auto_suggest=False)
     except wikipedia.exceptions.DisambiguationError as e:
         # The topic has multiple meanings — just take the first suggestion
-        print(f"⚠️ '{topic}' is ambiguous in '{lang}', using: {e.options[0]}")
+        print(f" '{topic}' is ambiguous in '{lang}', using: {e.options[0]}")
         return wikipedia.page(e.options[0], auto_suggest=False)
     except wikipedia.exceptions.PageError:
         return None
