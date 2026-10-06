@@ -1,3 +1,7 @@
+"""Steps 3 & 4 of the pipeline: turns text chunks into embeddings (numeric
+vectors that represent meaning), and stores them in a local Chroma
+vector database so they can be searched later.
+"""
 from langchain.schema import Document
 # الأداة اللي بتتصل بـ OpenAI وتحول أي نص لمتجه رقمي (vector)
 from langchain_openai import OpenAIEmbeddings
