@@ -19,8 +19,8 @@ LLM_MODEL = "gpt-4o-mini"
 LLM_TEMPERATURE = 0.2
 # Number of chunks the retriever returns to build the answer from
 RETRIEVER_TOP_K = 4
-# Default Wikipedia language (  "en", "ar")
-WIKI_LANGS = ["ar", "en"]
+# Default Wikipedia language (   "ar")
+WIKI_LANGS = ["ar"]
 def check_api_key():
 # Make sure the OpenAI API key is set before running anything that needs a model.
     if not os.environ.get("OPENAI_API_KEY"):
