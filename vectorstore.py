@@ -24,3 +24,8 @@ def build_vectorstore(chunks: list[Document]) -> Chroma:
         collection_name=COLLECTION_NAME,
         persist_directory=PERSIST_DIR,
     )
+    print(f"Stored {len(chunks)} chunk(s) in Chroma at '{PERSIST_DIR}'")
+    return vectorstore
+# لاحظ ما بتاخد أي باراميتر — لأنها مش بتبني شي جديد، هي بس بتفتح قاعدة بيانات موجودة مسبقاً على القرص.
+def load_vectorstore() -> Chroma:
+
