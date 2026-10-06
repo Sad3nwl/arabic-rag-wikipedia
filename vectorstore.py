@@ -13,3 +13,5 @@ def build_vectorstore(chunks: list[Document]) -> Chroma:
        بتاخد الأجزاء (من chunking.py)، وبترجع قاعدة بيانات جاهزة للبحث فيها.
        """
     check_api_key()
+    # بننشئ "المحوّل" — الأداة اللي بتاخد نص وترجعلك متجه رقمي يمثل معناه. لسا ما حولنا أي شي هون، بس جهزنا الأداة.
+    embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL)
