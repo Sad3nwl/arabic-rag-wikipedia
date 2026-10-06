@@ -28,4 +28,11 @@ def build_vectorstore(chunks: list[Document]) -> Chroma:
     return vectorstore
 # لاحظ ما بتاخد أي باراميتر — لأنها مش بتبني شي جديد، هي بس بتفتح قاعدة بيانات موجودة مسبقاً على القرص.
 def load_vectorstore() -> Chroma:
-
+    """نفس الإعدادات بالظبط متل الدالة الأولى (نفس المجلد، نفس اسم المجموعة) — عشان توصل لنفس البيانات المخزنة.
+     الفرق إنه هون منستخدم Chroma(...) مباشرة مش Chroma.from_documents(...)،
+     لأنه ما في مستندات جديدة نضيفها، بس بدنا "نفتح الباب" على اللي موجود مسبقاً."""
+    vectorstore = Chroma(
+        collection_name=COLLECTION_NAME,
+        embedding_function=embeddings,
+        persist_directory=PERSIST_DIR,
+    )
