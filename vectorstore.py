@@ -40,6 +40,7 @@ def load_vectorstore() -> Chroma:
         embedding_function=embeddings,
         persist_directory=PERSIST_DIR,
     )
+
 """لو كل مرة استخدمت build_vectorstore بس، 
 رح تعيد تحويل (embed) كل النصوص من جديد كل مرة تفتح المشروع — وهاد مكلف وبطيء (بتدفع لـ OpenAI كل مرة).
  فـ load_vectorstore بتوفرلك هاد، باستخدام اللي محفوظ مسبقاً."""
