@@ -7,4 +7,5 @@ from langchain_openai import ChatOpenAI
 from langchain.chains import RetrievalQA
 # – قالب جاهز نحط فيه التعليمات اللي بدنا نرسلها مع كل سؤال
 from langchain.prompts import PromptTemplate
+# اسم الموديل، درجة الحرارة، عدد الأجزاء المسترجعة، ودالة فحص الـ API key
 from Config import LLM_MODEL, LLM_TEMPERATURE, RETRIEVER_TOP_K, check_api_key
