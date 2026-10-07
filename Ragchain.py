@@ -53,6 +53,11 @@ def ask(chain, question: str) -> dict:
         {"title": doc.metadata.get("source"), "url": doc.metadata.get("url")}
         for doc in result["source_documents"]
     ]
+    # بنرجّع dict بسيط فيه بس شيئين: نص الجواب، ولستة المصادر — هاد الشكل اللي رح تستخدمه مباشرة بواجهة Streamlit بعدين.
+    return {
+        "answer": result["result"],
+        "sources": sources,
+    }
 
 
 
