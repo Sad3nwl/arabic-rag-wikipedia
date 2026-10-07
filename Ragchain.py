@@ -29,6 +29,19 @@ def build_rag_chain(vectorstore):
         template=PROMPT_TEMPLATE,
         input_variables=["context", "question"],
     )
+    """هون بنربط كل القطع اللي جهزناها مع بعض بسطر وحيد:
+1)llm – مين رح يولّد الجواب
+2)retriever – مين رح يجيب النصوص
+3)chain_type="stuff" – يعني "خد كل الأجزاء المسترجعة واحشرها (stuff) كلها جوا الـ {context} دفعة وحدة" (أبسط استراتيجية، مناسبة لما الأجزاء مش كتار كتار)
+4)return_source_documents=True – خليه يرجعلنا كمان من وين جاب المعلومة، مش بس الجواب
+5)chain_type_kwargs={"prompt": prompt} – استخدم القالب اللي كتبناه إحنا، مش القالب الافتراضي لـ LangChain"""
+    chain = RetrievalQA.from_chain_type(
+        llm=llm,
+        chain_type="stuff",
+        retriever=retriever,
+        return_source_documents=True,
+        chain_type_kwargs={"prompt": prompt},
+    )
 
 
 
