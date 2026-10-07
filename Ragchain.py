@@ -43,6 +43,10 @@ def build_rag_chain(vectorstore):
         chain_type_kwargs={"prompt": prompt},
     )
     return chain
+# دالة "واجهة بسيطة" — بتاخد السلسلة والسؤال، وبترجع نتيجة منظمة وواضحة، بدل ما تضطر تتعامل مع شكل الإخراج المعقّد تبع LangChain مباشرة.
+def ask(chain, question: str) -> dict:
+    # هون فعلياً بيصير كل شي: الاسترجاع + بناء الـ prompt + إرسالها للـ LLM + استقبال الجواب. السطر الوحيد اللي "بيشتغل" بكل الدالة.
+    result = chain.invoke({"query": question})
 
 
 
