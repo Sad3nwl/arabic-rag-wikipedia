@@ -1,5 +1,4 @@
 """
------------
 Step 2 of the pipeline: takes full-length articles (as LangChain Documents,
 usually coming from ingest.py) and splits them into small, overlapping chunks
 that are easier and cheaper to embed and search later.
