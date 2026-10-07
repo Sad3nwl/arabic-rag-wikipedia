@@ -42,6 +42,8 @@ def build_rag_chain(vectorstore):
         return_source_documents=True,
         chain_type_kwargs={"prompt": prompt},
     )
+    return chain
+
 
 
 
