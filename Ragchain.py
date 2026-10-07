@@ -22,5 +22,14 @@ def build_rag_chain(vectorstore):
     check_api_key()
     # بنجهز نموذج المحادثة. temperature=0.2 (من config.py) معناها: خليه "محافظ" بإجاباته، يلتزم بالنص المعطى بدل ما "يبدع" أو يحيد عنه.
     llm = ChatOpenAI(model=LLM_MODEL, temperature=LLM_TEMPERATURE)
+    # بنحول قاعدة البيانات لـ "باحث" (retriever) — أداة وظيفتها الوحيدة: تاخد سؤال وترجع أقرب k أجزاء له (٤ أجزاء، من RETRIEVER_TOP_K).
+    retriever = vectorstore.as_retriever(search_kwargs={"k": RETRIEVER_TOP_K})
+    # بنحول النص الخام اللي كتبناه فوق لـ "قالب" رسمي تقدر LangChain تتعامل معه، وبنحدد صراحة: "هاد القالب بياخد متغيرين: context و question".
+    prompt = PromptTemplate(
+        template=PROMPT_TEMPLATE,
+        input_variables=["context", "question"],
+    )
+
+
 
 
