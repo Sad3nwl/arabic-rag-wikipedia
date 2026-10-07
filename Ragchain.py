@@ -17,4 +17,6 @@ Context:
 {context}
 Question: {question}
 Answer:"""
+# بتاخد قاعدة البيانات الجاهزة (الناتجة من vectorstore.py)، وبترجع "سلسلة" (chain) جاهزة تقدر تسألها أسئلة مباشرة.
 def build_rag_chain(vectorstore):
+
