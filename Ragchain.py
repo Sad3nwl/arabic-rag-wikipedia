@@ -29,7 +29,7 @@ def build_rag_chain(vectorstore):
         template=PROMPT_TEMPLATE,
         input_variables=["context", "question"],
     )
-"""هون بنربط كل القطع اللي جهزناها مع بعض بسطر وحيد:
+    """هون بنربط كل القطع اللي جهزناها مع بعض بسطر وحيد:
 1)llm – مين رح يولّد الجواب
 2)retriever – مين رح يجيب النصوص
 3)chain_type="stuff" – يعني "خد كل الأجزاء المسترجعة واحشرها (stuff) كلها جوا الـ {context} دفعة وحدة" (أبسط استراتيجية، مناسبة لما الأجزاء مش كتار كتار)
