@@ -20,5 +20,7 @@ Answer:"""
 # بتاخد قاعدة البيانات الجاهزة (الناتجة من vectorstore.py)، وبترجع "سلسلة" (chain) جاهزة تقدر تسألها أسئلة مباشرة.
 def build_rag_chain(vectorstore):
     check_api_key()
+    # بنجهز نموذج المحادثة. temperature=0.2 (من config.py) معناها: خليه "محافظ" بإجاباته، يلتزم بالنص المعطى بدل ما "يبدع" أو يحيد عنه.
+    llm = ChatOpenAI(model=LLM_MODEL, temperature=LLM_TEMPERATURE)
 
 
