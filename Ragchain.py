@@ -47,6 +47,12 @@ def build_rag_chain(vectorstore):
 def ask(chain, question: str) -> dict:
     # هون فعلياً بيصير كل شي: الاسترجاع + بناء الـ prompt + إرسالها للـ LLM + استقبال الجواب. السطر الوحيد اللي "بيشتغل" بكل الدالة.
     result = chain.invoke({"query": question})
+    """result["source_documents"] فيها كل الأجزاء الأصلية (الـ Document objects) اللي استخدمها الـ LLM.
+     هون بنلف عليهم ونسحب منهم بس اسم المقالة والرابط (مش النص الكامل)، ونحطهم بشكل نظيف كـ لستة dict."""
+    sources = [
+        {"title": doc.metadata.get("source"), "url": doc.metadata.get("url")}
+        for doc in result["source_documents"]
+    ]
 
 
 
