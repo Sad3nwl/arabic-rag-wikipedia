@@ -1,5 +1,4 @@
 """
-chunking.py
 -----------
 Step 2 of the pipeline: takes full-length articles (as LangChain Documents,
 usually coming from ingest.py) and splits them into small, overlapping chunks
@@ -23,6 +22,7 @@ def split_documents(documents: list[Document]) -> list[Document]:
         #ترتيب أولوية "أماكن القطع المفضلة": فقرة كاملة (\n\n) → سطر جديد (\n) → نهاية جملة (. ) → مسافة (" ") → أي مكان ("").
         separators=["\n\n", "\n", ". ", " ", ""],
     )
+    
     # تقطع النص حسب الـ separators
     # تنسخ نفس الـ metadata تبع كل مقالة أصلية لكل جزء طلع منها — هيك ما بتفقد معرفة "هاد الجزء جاي من وين"
     chunks = splitter.split_documents(documents)
