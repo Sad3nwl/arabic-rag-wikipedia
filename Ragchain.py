@@ -9,3 +9,12 @@ from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 # اسم الموديل، درجة الحرارة، عدد الأجزاء المسترجعة، ودالة فحص الـ API key
 from Config import LLM_MODEL, LLM_TEMPERATURE, RETRIEVER_TOP_K, check_api_key
+# هاد بالظبط اللي بيمنع الـ LLM إنه "يخترع" معلومات مش موجودة عندنا.
+PROMPT_TEMPLATE = """You are a helpful assistant that answers questions using
+ONLY the context provided below. If the answer isn't in the context, say you
+don't have enough information — do not make anything up.
+Context:
+{context}
+Question: {question}
+Answer:"""
+def build_rag_chain(vectorstore):
