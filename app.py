@@ -7,19 +7,15 @@ Streamlit interface that ties the whole RAG pipeline together:
 Run with:  streamlit run app.py
 """
 import os
-
 import streamlit as st
 from dotenv import load_dotenv
-
 # Load OPENAI_API_KEY from a local .env file (if there is one)
 load_dotenv()
-
 from Config import PERSIST_DIR
 from Ingest import fetch_wikipedia_pages
 from chunking import split_documents
 from vectorstore import build_vectorstore, load_vectorstore
 from Ragchain import build_rag_chain, ask
-
 # ---------- Page setup ----------
 st.set_page_config(page_title="Wikipedia RAG", page_icon="📖", layout="centered")
 
