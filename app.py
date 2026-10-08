@@ -18,7 +18,6 @@ from vectorstore import build_vectorstore, load_vectorstore
 from Ragchain import build_rag_chain, ask
 # ---------- Page setup ----------
 st.set_page_config(page_title="Wikipedia RAG", page_icon="📖", layout="centered")
-
 # Make chat messages render right-to-left so Arabic text looks right
 st.markdown(
     """
