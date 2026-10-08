@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 # Load OPENAI_API_KEY from a local .env file (if there is one)
 load_dotenv()
 from Config import PERSIST_DIR
-from Ingest import fetch_wikipedia_pages
+from ingest import fetch_wikipedia_pages
 from chunking import split_documents
 from vectorstore import build_vectorstore, load_vectorstore
 from Ragchain import build_rag_chain, ask
@@ -27,7 +27,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
 # ---------- Session state ----------
 # Streamlit re-runs this whole file on every interaction, so anything we
 # want to remember between runs must live in st.session_state.
