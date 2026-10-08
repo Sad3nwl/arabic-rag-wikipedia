@@ -51,8 +51,7 @@ def ask(chain, question: str) -> dict:
      هون بنلف عليهم ونسحب منهم بس اسم المقالة والرابط (مش النص الكامل)، ونحطهم بشكل نظيف كـ لستة dict."""
     sources = [
         {"title": doc.metadata.get("source"), "url": doc.metadata.get("url")}
-        for doc in result["source_documents"]
-    ]
+        for doc in result["source_documents"]]
     # بنرجّع dict بسيط فيه بس شيئين: نص الجواب، ولستة المصادر — هاد الشكل اللي رح تستخدمه مباشرة بواجهة Streamlit بعدين.
     return {
         "answer": result["result"],
