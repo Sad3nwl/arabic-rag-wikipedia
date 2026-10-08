@@ -34,7 +34,6 @@ if "chain" not in st.session_state:
     st.session_state.chain = None
 if "messages" not in st.session_state:
     st.session_state.messages = []
-
 # If a database was already built in a previous run, load it automatically
 if st.session_state.chain is None and os.path.isdir(PERSIST_DIR) and os.listdir(PERSIST_DIR):
     try:
