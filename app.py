@@ -14,11 +14,11 @@ from dotenv import load_dotenv
 # Load OPENAI_API_KEY from a local .env file (if there is one)
 load_dotenv()
 
-from config import PERSIST_DIR
-from ingest import fetch_wikipedia_pages
+from Config import PERSIST_DIR
+from Ingest import fetch_wikipedia_pages
 from chunking import split_documents
 from vectorstore import build_vectorstore, load_vectorstore
-from rag_chain import build_rag_chain, ask
+from Ragchain import build_rag_chain, ask
 
 # ---------- Page setup ----------
 st.set_page_config(page_title="Wikipedia RAG", page_icon="📖", layout="centered")
