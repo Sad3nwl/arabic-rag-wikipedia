@@ -55,8 +55,7 @@ def ask(chain, question: str) -> dict:
     # بنرجّع dict بسيط فيه بس شيئين: نص الجواب، ولستة المصادر — هاد الشكل اللي رح تستخدمه مباشرة بواجهة Streamlit بعدين.
     return {
         "answer": result["result"],
-        "sources": sources,
-    }
+        "sources": sources,}
 
 
 
