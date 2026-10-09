@@ -1,19 +1,9 @@
-# مكتبة جلب مقالات ويكيبيديا
 wikipedia==1.4.0
-
-# LangChain - تنظيم الـ RAG pipeline (chunking, retriever, chains)
 langchain==0.3.7
 langchain-community==0.3.7
-langchain-openai==0.2.9
-
-# قاعدة بيانات المتجهات (Vector Store)
+langchain-huggingface==0.1.2
+sentence-transformers==3.3.1
+langchain-groq==0.2.1
 chromadb==0.5.20
-
-# حساب عدد التوكنز (يستخدمها LangChain داخلياً مع نماذج OpenAI)
-tiktoken==0.8.0
-
-# واجهة المستخدم
 streamlit==1.40.1
-
-# لقراءة متغيرات البيئة من ملف .env (زي OPENAI_API_KEY)
 python-dotenv==1.0.1
