@@ -5,13 +5,10 @@ Steps 5 & 6 of the pipeline: given a user question, retrieve the most
 relevant chunks from the vector store, then pass them to an LLM along
 with the question so it can generate a grounded answer.
 """
-
 from langchain_groq import ChatGroq
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
-
-from config import LLM_MODEL, LLM_TEMPERATURE, RETRIEVER_TOP_K, check_api_key
-
+from Config import LLM_MODEL, LLM_TEMPERATURE, RETRIEVER_TOP_K, check_api_key
 # The prompt tells the LLM exactly how to behave: answer ONLY from the
 # provided context, and admit it when the answer isn't there.
 PROMPT_TEMPLATE = """You are a helpful assistant that answers questions using
