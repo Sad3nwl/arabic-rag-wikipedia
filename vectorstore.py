@@ -1,46 +1,42 @@
-"""Steps 3 & 4 of the pipeline: turns text chunks into embeddings (numeric
-vectors that represent meaning), and stores them in a local Chroma
+"""
+vectorstore.py
+--------------
+Steps 3 & 4 of the pipeline: turns text chunks into embeddings (numeric
+vectors that represent meaning, computed locally for free), and stores them in a local Chroma
 vector database so they can be searched later.
 """
-from langchain.schema import Document
-# الأداة اللي بتتصل بـ OpenAI وتحول أي نص لمتجه رقمي (vector)
-from langchain_openai import OpenAIEmbeddings
-# قاعدة بيانات المتجهات نفسها (محلية، بتتخزن على جهازك)
-from langchain_community.vectorstores import Chroma
-# مكان التخزين، اسم المجموعة، اسم نموذج الـ embedding، ودالة التأكد من وجود API key
-from Config import PERSIST_DIR, COLLECTION_NAME, EMBEDDING_MODEL, check_api_key
 
+from langchain.schema import Document
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.vectorstores import Chroma
+
+from Config import PERSIST_DIR, COLLECTION_NAME, EMBEDDING_MODEL
 def build_vectorstore(chunks: list[Document]) -> Chroma:
     """
-       Embeds each chunk and stores it in a persistent local Chroma database.
-       Returns the vectorstore object, ready to be queried right away.
-       بتاخد الأجزاء (من chunking.py)، وبترجع قاعدة بيانات جاهزة للبحث فيها.
-       """
-    check_api_key()
-    # بننشئ "المحوّل" — الأداة اللي بتاخد نص وترجعلك متجه رقمي يمثل معناه. لسا ما حولنا أي شي هون، بس جهزنا الأداة.
-    embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL)
-    """Chroma بتسوي شغلتين تلقائياً:
-بتاخد كل جزء من chunks، وبتستخدم embeddings تحوله لمتجه رقمي
-بتخزن كل متجه + النص الأصلي + الـ metadata بقاعدة بيانات محلية، بمجلد اسمه chroma_db (من PERSIST_DIR)"""
+    Embeds each chunk and stores it in a persistent local Chroma database.
+    Returns the vectorstore object, ready to be queried right away.
+    """
+    embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
+
     vectorstore = Chroma.from_documents(
         documents=chunks,
         embedding=embeddings,
         collection_name=COLLECTION_NAME,
         persist_directory=PERSIST_DIR,
     )
-    print(f"Stored {len(chunks)} chunk(s) in Chroma at '{PERSIST_DIR}'")
+    print(f"💾 Stored {len(chunks)} chunk(s) in Chroma at '{PERSIST_DIR}'")
     return vectorstore
-# لاحظ ما بتاخد أي باراميتر — لأنها مش بتبني شي جديد، هي بس بتفتح قاعدة بيانات موجودة مسبقاً على القرص.
 def load_vectorstore() -> Chroma:
-    """نفس الإعدادات بالظبط متل الدالة الأولى (نفس المجلد، نفس اسم المجموعة) — عشان توصل لنفس البيانات المخزنة.
-     الفرق إنه هون منستخدم Chroma(...) مباشرة مش Chroma.from_documents(...)،
-     لأنه ما في مستندات جديدة نضيفها، بس بدنا "نفتح الباب" على اللي موجود مسبقاً."""
+    """
+    Loads an existing Chroma database from disk, without re-embedding
+    anything. Use this on later runs, once build_vectorstore() has
+    already been called once.
+    """
+    embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
     vectorstore = Chroma(
         collection_name=COLLECTION_NAME,
         embedding_function=embeddings,
         persist_directory=PERSIST_DIR,
     )
-
-"""لو كل مرة استخدمت build_vectorstore بس، 
-رح تعيد تحويل (embed) كل النصوص من جديد كل مرة تفتح المشروع — وهاد مكلف وبطيء (بتدفع لـ OpenAI كل مرة).
- فـ load_vectorstore بتوفرلك هاد، باستخدام اللي محفوظ مسبقاً."""
+    print(f"📂 Loaded existing Chroma database from '{PERSIST_DIR}'")
+    return vectorstore
