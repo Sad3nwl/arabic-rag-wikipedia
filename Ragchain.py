@@ -29,16 +29,12 @@ def build_rag_chain(vectorstore):
     Returns a chain object with a `.invoke({"query": ...})` method.
     """
     check_api_key()
-
     llm = ChatGroq(model=LLM_MODEL, temperature=LLM_TEMPERATURE)
-
     retriever = vectorstore.as_retriever(search_kwargs={"k": RETRIEVER_TOP_K})
-
     prompt = PromptTemplate(
         template=PROMPT_TEMPLATE,
         input_variables=["context", "question"],
     )
-
     chain = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type="stuff",
@@ -46,7 +42,6 @@ def build_rag_chain(vectorstore):
         return_source_documents=True,
         chain_type_kwargs={"prompt": prompt},
     )
-
     return chain
 
 
