@@ -24,7 +24,6 @@ EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 LLM_MODEL = "llama-3.3-70b-versatile"
 # Lower temperature = answers stick closer to the retrieved sources (less "creative")
 LLM_TEMPERATURE = 0.2
-
 # Number of chunks the retriever returns to build the answer from
 RETRIEVER_TOP_K = 4
 # Wikipedia languages to try, in priority order.

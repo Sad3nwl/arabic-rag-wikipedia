@@ -14,15 +14,10 @@ from Config import LLM_MODEL, LLM_TEMPERATURE, RETRIEVER_TOP_K, check_api_key
 PROMPT_TEMPLATE = """You are a helpful assistant that answers questions using
 ONLY the context provided below. If the answer isn't in the context, say you
 don't have enough information — do not make anything up.
-
 Context:
 {context}
-
 Question: {question}
-
 Answer:"""
-
-
 def build_rag_chain(vectorstore):
     """
     Builds a question-answering chain on top of an existing vectorstore.
@@ -43,20 +38,16 @@ def build_rag_chain(vectorstore):
         chain_type_kwargs={"prompt": prompt},
     )
     return chain
-
-
 def ask(chain, question: str) -> dict:
     """
     Asks a question through the chain and returns a clean dict with
     the answer text and the list of sources it was based on.
     """
     result = chain.invoke({"query": question})
-
     sources = [
         {"title": doc.metadata.get("source"), "url": doc.metadata.get("url")}
         for doc in result["source_documents"]
     ]
-
     return {
         "answer": result["result"],
         "sources": sources,
