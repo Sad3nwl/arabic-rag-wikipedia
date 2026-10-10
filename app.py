@@ -1,6 +1,4 @@
 """
-app.py
-------
 Streamlit interface that ties the whole RAG pipeline together:
   sidebar -> fetch Wikipedia articles, chunk them, embed & store them
   main    -> chat with the knowledge base and see the sources of each answer
