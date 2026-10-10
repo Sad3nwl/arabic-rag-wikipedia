@@ -48,5 +48,4 @@ def ask(chain, question: str) -> dict:
     ]
     return {
         "answer": result["result"],
-        "sources": sources,
-    }
+        "sources": sources, }
