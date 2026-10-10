@@ -1,5 +1,5 @@
 """
- turns text chunks into embeddings (numeric
+turns text chunks into embeddings (numeric
 vectors that represent meaning, computed locally for free), and stores them in a local Chroma
 vector database so they can be searched later.
 """
