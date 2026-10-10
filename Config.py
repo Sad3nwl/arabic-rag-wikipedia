@@ -19,7 +19,7 @@ CHUNK_OVERLAP = 100
 # NOTE: if you change it, delete the chroma_db folder and rebuild the database.
 EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 # LLM used to generate the final answer (served by Groq, free tier)
-LLM_MODEL = "llama-3.3-70b-versatile"
+LLM_MODEL = "openai/gpt-oss-120b"
 # Lower temperature = answers stick closer to the retrieved sources (less "creative")
 LLM_TEMPERATURE = 0.2
 # Number of chunks the retriever returns to build the answer from
