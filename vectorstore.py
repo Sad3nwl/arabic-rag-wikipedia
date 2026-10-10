@@ -1,7 +1,5 @@
 """
-vectorstore.py
---------------
-Steps 3 & 4 of the pipeline: turns text chunks into embeddings (numeric
+ turns text chunks into embeddings (numeric
 vectors that represent meaning, computed locally for free), and stores them in a local Chroma
 vector database so they can be searched later.
 """
@@ -15,7 +13,6 @@ def build_vectorstore(chunks: list[Document]) -> Chroma:
     Returns the vectorstore object, ready to be queried right away.
     """
     embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
-
     vectorstore = Chroma.from_documents(
         documents=chunks,
         embedding=embeddings,
@@ -36,5 +33,5 @@ def load_vectorstore() -> Chroma:
         embedding_function=embeddings,
         persist_directory=PERSIST_DIR,
     )
-    print(f"📂 Loaded existing Chroma database from '{PERSIST_DIR}'")
+    print(f" Loaded existing Chroma database from '{PERSIST_DIR}'")
     return vectorstore

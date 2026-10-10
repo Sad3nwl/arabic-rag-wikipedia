@@ -1,6 +1,4 @@
 """
-config.py
----------
 Central configuration shared across the RAG pipeline (ingestion, retrieval, generation).
 Keeping everything in one place makes it much easier to tweak and experiment.
 """
