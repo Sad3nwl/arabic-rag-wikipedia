@@ -5,6 +5,7 @@ Steps 5 & 6 of the pipeline: given a user question, retrieve the most
 relevant chunks from the vector store, then pass them to an LLM along
 with the question so it can generate a grounded answer.
 """
+
 from langchain_groq import ChatGroq
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
