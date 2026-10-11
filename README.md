@@ -77,8 +77,7 @@ Built with **LangChain**, **Chroma**, **Streamlit**, local **Hugging Face embedd
 | <img src="https://img.shields.io/badge/-PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch" /> | **PyTorch** | Runs the embedding model |
 | <img src="https://img.shields.io/badge/-Groq-F55036?style=flat-square" alt="Groq" /> | **Groq** | Fast LLM inference (free tier) |
 | <img src="https://img.shields.io/badge/-Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white" alt="Streamlit" /> | **Streamlit** | Chat interface |
-  <img src="https://img.shields.io/badge/Wikipedia-000000?style=for-the-badge&logo=wikipedia&logoColor=white" alt="Wikipedia" />
-</p> | **Wikipedia** package | Source of the articles |
+  <img src="https://img.shields.io/badge/Wikipedia-000000?style=for-the-badge&logo=wikipedia&logoColor=white" alt="Wikipedia" /> | **Wikipedia** package | Source of the articles |
 
 ## Project structure
 
