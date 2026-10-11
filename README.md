@@ -1,4 +1,19 @@
-# Arabic RAG over Wikipedia
+<h1 align="center">Arabic RAG over Wikipedia</h1>
+
+<p align="center">
+  Ask questions about Arabic Wikipedia articles and get answers grounded in the source text, with a link to every article used.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white" alt="LangChain" />
+  <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit" />
+  <img src="https://img.shields.io/badge/Chroma-FF6446?style=for-the-badge" alt="Chroma" />
+  <img src="https://img.shields.io/badge/Hugging%20Face-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black" alt="Hugging Face" />
+  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch" />
+  <img src="https://img.shields.io/badge/Groq-F55036?style=for-the-badge" alt="Groq" />
+  <img src="https://img.shields.io/badge/Wikipedia-000000?style=for-the-badge&logo=wikipedia&logoColor=white" alt="Wikipedia" />
+</p>
 
 A step-by-step **Retrieval-Augmented Generation (RAG)** app that fetches Arabic Wikipedia articles, chunks and embeds them, stores them in a Chroma vector database, and answers questions through a Streamlit chat interface. Every answer comes with links to the Wikipedia articles it was based on.
 
@@ -7,6 +22,18 @@ Built with **LangChain**, **Chroma**, **Streamlit**, local **Hugging Face embedd
 <!-- Add a screenshot of the app here:
 ![App screenshot](docs/screenshot.png)
 -->
+
+## Table of contents
+
+- [Features](#features)
+- [How it works](#how-it-works)
+- [Tech stack](#tech-stack)
+- [Project structure](#project-structure)
+- [Getting started](#getting-started)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Troubleshooting](#troubleshooting)
+- [Author](#author)
 
 ## Features
 
@@ -38,6 +65,19 @@ Built with **LangChain**, **Chroma**, **Streamlit**, local **Hugging Face embedd
 4. **Store:** save the vectors in a local Chroma database.
 5. **Retrieve:** embed the question and find the closest chunks.
 6. **Generate:** give the chunks and the question to the LLM and ask it to answer using only that context.
+
+## Tech stack
+
+| | Technology | Role in the project |
+|---|---|---|
+| <img src="https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python" /> | **Python** | Programming language |
+| <img src="https://img.shields.io/badge/-LangChain-1C3C3C?style=flat-square&logo=langchain&logoColor=white" alt="LangChain" /> | **LangChain** | Orchestrates chunking, retrieval and the answer chain |
+| <img src="https://img.shields.io/badge/-Chroma-FF6446?style=flat-square" alt="Chroma" /> | **Chroma** | Local vector database |
+| <img src="https://img.shields.io/badge/-Sentence--Transformers-2F80ED?style=flat-square&logo=huggingface&logoColor=white" alt="Sentence Transformers" /> | **Sentence Transformers** | Local multilingual embeddings (supports Arabic) |
+| <img src="https://img.shields.io/badge/-PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch" /> | **PyTorch** | Runs the embedding model |
+| <img src="https://img.shields.io/badge/-Groq-F55036?style=flat-square" alt="Groq" /> | **Groq** | Fast LLM inference (free tier) |
+| <img src="https://img.shields.io/badge/-Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white" alt="Streamlit" /> | **Streamlit** | Chat interface |
+| <img src="https://img.shields.io/badge/-Wikipedia-000000?style=flat-square&logo=wikipedia&logoColor=white" alt="Wikipedia" /> | **Wikipedia** package | Source of the articles |
 
 ## Project structure
 
@@ -127,20 +167,19 @@ Everything lives in [`config.py`](config.py):
 | Problem | Likely cause and fix |
 |---|---|
 | `JSONDecodeError: Expecting value` while fetching | The old `wikipedia` package uses plain HTTP and a bare request. `ingest.py` replaces its request function to fix this. If it persists, check for a VPN, firewall or antivirus blocking requests. |
+| `429 Too Many Requests` from Wikipedia | You sent too many requests in a short time. `ingest.py` retries automatically; if it still fails, wait a few minutes and build the knowledge base once. |
 | `model_not_found` / 404 from Groq | Groq retires models regularly. Pick a current one from [console.groq.com/docs/models](https://console.groq.com/docs/models) and update `LLM_MODEL`. |
-| `429` rate limit | You reached the free-tier limit. Wait a moment and try again. |
+| `429` from Groq | You reached the free-tier limit. Wait a moment and try again. |
+| `os error 1455` (paging file too small) on Windows | Not enough memory to load PyTorch and the embedding model. Close heavy programs and increase the Windows virtual memory (paging file), then restart. |
 | `ModuleNotFoundError` for a project file | File names must be lowercase with underscores: `config.py`, `ingest.py`, `rag_chain.py`, `vectorstore.py`, `chunking.py`. |
 | `GROQ_API_KEY` error | The `.env` file is missing, in the wrong folder, or the variable name is wrong. Restart the app after editing it. |
-
-## Tech stack
-
-- [LangChain](https://python.langchain.com/) for the RAG pipeline
-- [Chroma](https://www.trychroma.com/) as the vector database
-- [Sentence Transformers](https://www.sbert.net/) for local multilingual embeddings
-- [Groq](https://groq.com/) for fast LLM inference
-- [Streamlit](https://streamlit.io/) for the interface
-- [Wikipedia](https://pypi.org/project/wikipedia/) Python package for data
 
 ## License
 
 Add a license of your choice (for example MIT) by creating a `LICENSE` file.
+
+## Author
+
+<p align="center">
+  Made by <a href="https://github.com/Sad3nwl"><b>Sadeen Abdelalrahman</b></a>
+</p>
