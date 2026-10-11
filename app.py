@@ -63,7 +63,7 @@ with st.sidebar:
     st.caption("New topics are added to the existing database, not replaced.")
     st.divider()
     st.caption("This project was made by Sadeen Abdelalrahman.")
-# ---------- Main area: chat ----------
+# ---------- Main area: chat ---------
 st.title("📖 Wikipedia RAG")
 st.caption("Ask questions and get answers grounded in the Wikipedia articles you indexed.")
 st.caption("Made by Sadeen Abdelalrahman(sad3nwl)")
