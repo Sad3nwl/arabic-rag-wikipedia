@@ -79,24 +79,19 @@ if st.session_state.chain is None:
     st.info("Build a knowledge base from the sidebar to start asking questions.")
 else:
     question = st.chat_input("Ask a question...")
-
     if question:
         with st.chat_message("user"):
             st.markdown(question)
-
         with st.chat_message("assistant"):
             try:
                 with st.spinner("Thinking..."):
                     result = ask(st.session_state.chain, question)
-
                 # The same article can appear several times (several chunks), so de-duplicate
                 unique_sources = list({s["url"]: s for s in result["sources"]}.values())
-
                 st.markdown(result["answer"])
                 with st.expander("Sources"):
                     for s in unique_sources:
                         st.markdown(f"- [{s['title']}]({s['url']})")
-
                 st.session_state.messages.append({"role": "user", "content": question})
                 st.session_state.messages.append(
                     {"role": "assistant", "content": result["answer"], "sources": unique_sources}
