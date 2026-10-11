@@ -73,7 +73,7 @@ Built with **LangChain**, **Chroma**, **Streamlit**, local **Hugging Face embedd
 | <img src="https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python" /> | **Python** | Programming language |
 | <img src="https://img.shields.io/badge/-LangChain-1C3C3C?style=flat-square&logo=langchain&logoColor=white" alt="LangChain" /> | **LangChain** | Orchestrates chunking, retrieval and the answer chain |
 | <img src="https://img.shields.io/badge/-Chroma-FF6446?style=flat-square" alt="Chroma" /> | **Chroma** | Local vector database |
-| <img src="https://img.shields.io/badge/-Sentence--Transformers-2F80ED?style=flat-square&logo=huggingface&logoColor=white" alt="Sentence Transformers" /> | **Sentence Transformers** | Local multilingual embeddings (supports Arabic) |
+| <img src="https://img.shields.io/badge/-Sentence--Transformers-2F80ED?style=flat-square" alt="Sentence Transformers" /> | **Sentence Transformers** | Local multilingual embeddings (supports Arabic) |
 | <img src="https://img.shields.io/badge/-PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch" /> | **PyTorch** | Runs the embedding model |
 | <img src="https://img.shields.io/badge/-Groq-F55036?style=flat-square" alt="Groq" /> | **Groq** | Fast LLM inference (free tier) |
 | <img src="https://img.shields.io/badge/-Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white" alt="Streamlit" /> | **Streamlit** | Chat interface |
