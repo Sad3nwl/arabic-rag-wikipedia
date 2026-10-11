@@ -174,10 +174,6 @@ Everything lives in [`config.py`](config.py):
 | `ModuleNotFoundError` for a project file | File names must be lowercase with underscores: `config.py`, `ingest.py`, `rag_chain.py`, `vectorstore.py`, `chunking.py`. |
 | `GROQ_API_KEY` error | The `.env` file is missing, in the wrong folder, or the variable name is wrong. Restart the app after editing it. |
 
-## License
-
-Add a license of your choice (for example MIT) by creating a `LICENSE` file.
-
 ## Author
 
 <p align="center">
