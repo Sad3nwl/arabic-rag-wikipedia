@@ -19,31 +19,24 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
-# ---------- Session state ----------
-# Streamlit re-runs this whole file on every interaction, so anything we
-# want to remember between runs must live in st.session_state.
 if "chain" not in st.session_state:
     st.session_state.chain = None
 if "messages" not in st.session_state:
     st.session_state.messages = []
-
 # If a database was already built in a previous run, load it automatically
 if st.session_state.chain is None and os.path.isdir(PERSIST_DIR) and os.listdir(PERSIST_DIR):
     try:
         st.session_state.chain = build_rag_chain(load_vectorstore())
     except Exception as e:
         st.warning(f"Found an existing database but couldn't load it: {e}")
-
 # ---------- Sidebar: build the knowledge base ----------
 with st.sidebar:
     st.header("📚 Knowledge base")
     topics_text = st.text_area(
         "Wikipedia topics (one per line)",
-        value="الذكاء الاصطناعي",
+        value="كريستيانو رونالدو",
         height=150,
     )
-
     if st.button("Build knowledge base", type="primary"):
         topics = [t.strip() for t in topics_text.splitlines() if t.strip()]
 
@@ -62,22 +55,18 @@ with st.sidebar:
 
                     with st.spinner("Creating embeddings and storing them..."):
                         vectorstore = build_vectorstore(chunks)
-
                     st.session_state.chain = build_rag_chain(vectorstore)
                     st.session_state.messages = []
                     st.success(f"Indexed {len(docs)} article(s) into {len(chunks)} chunks.")
             except Exception as e:
                 st.error(f"Something went wrong: {e}")
-
     st.caption("New topics are added to the existing database, not replaced.")
     st.divider()
     st.caption("This project was made by Sadeen Abdelalrahman.")
-
 # ---------- Main area: chat ----------
 st.title("📖 Wikipedia RAG")
 st.caption("Ask questions and get answers grounded in the Wikipedia articles you indexed.")
-st.caption("Made by Sadeen Abdelalrahman")
-
+st.caption("Made by Sadeen Abdelalrahman(sad3nwl)")
 # Show the conversation so far
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
@@ -86,7 +75,6 @@ for msg in st.session_state.messages:
             with st.expander("Sources"):
                 for s in msg["sources"]:
                     st.markdown(f"- [{s['title']}]({s['url']})")
-
 if st.session_state.chain is None:
     st.info("Build a knowledge base from the sidebar to start asking questions.")
 else:
