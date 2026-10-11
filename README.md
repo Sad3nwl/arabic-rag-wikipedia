@@ -36,7 +36,6 @@ Built with **LangChain**, **Chroma**, **Streamlit**, local **Hugging Face embedd
 - [Author](#author)
 
 ## Features
-
 - Fetches Arabic Wikipedia articles by topic
 - Splits articles into overlapping chunks that respect paragraph and sentence boundaries
 - Multilingual embeddings that run **locally and for free** (support Arabic)
