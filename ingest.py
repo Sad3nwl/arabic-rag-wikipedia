@@ -102,11 +102,15 @@ def fetch_wikipedia_pages(topics: list[str], langs: list[str] = WIKI_LANGS) -> l
         if page is None:
             print(f"❌ No article found for '{topic}' in any of {langs}")
             continue
+"""بنضيف المقالة للستة بعد ما نحولها لـ Document:
+page_content: نص المقالة كامل.
+metadata: عنوانها ورابطها ولغتها. هاي اللي بتظهر لاحقاً تحت Sources."""
         documents.append(
             Document(
                 page_content=page.content,
                 metadata={"source": page.title, "url": page.url, "lang": used_lang},
             )
         )
+# رسالة تأكيد: اسم المقالة، اللغة، وعدد حروفها.
         print(f"✅ Fetched: {page.title} [{used_lang}] ({len(page.content)} chars)")
     return documents
