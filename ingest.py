@@ -14,6 +14,7 @@ import requests
 import wikipedia
 from langchain.schema import Document
 from Config import WIKI_LANGS
+
 _session = requests.Session()
 _session.headers.update({
     "User-Agent": "arabic-rag-wikipedia/1.0 (contact: you@example.com)",
@@ -29,6 +30,11 @@ def _patched_wiki_request(params):
     return response.json()
 wikipedia.wikipedia._wiki_request = _patched_wiki_request
 # --- end patch ---
+"""بتجرب تجيب موضوع واحد بلغة واحدة، وفي ٣ احتمالات:
+
+نجحت: بترجع المقالة.
+الاسم له أكتر من معنى: بتاخد أول اقتراح.
+المقالة مش موجودة: بترجع None وما بتكسّر البرنامج."""
 def _fetch_single_page(topic: str, lang: str):
     """
     Tries to fetch one article in one language.
