@@ -19,6 +19,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 if "chain" not in st.session_state:
     st.session_state.chain = None
 if "messages" not in st.session_state:
@@ -37,6 +38,7 @@ with st.sidebar:
         value="كريستيانو رونالدو",
         height=150,
     )
+    
     if st.button("Build knowledge base", type="primary"):
         topics = [t.strip() for t in topics_text.splitlines() if t.strip()]
 
