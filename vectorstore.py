@@ -26,6 +26,7 @@ def load_vectorstore() -> Chroma:
     Loads an existing Chroma database from disk, without re-embedding
     anything. Use this on later runs, once build_vectorstore() has
     already been called once.
+    
     """
     embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
     vectorstore = Chroma(
