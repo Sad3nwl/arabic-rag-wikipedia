@@ -57,10 +57,13 @@ def _fetch_single_page(topic: str, lang: str):
     Tries to fetch one article in one language.
     Returns the wikipedia page object, or None if it doesn't exist in this language.
     """
+  # بتحدد أي نسخة من ويكيبيديا نتعامل معها (ar تعني ar.wikipedia.org).
     wikipedia.set_lang(lang)
+  # بتحاول تجيب المقالة. try معناها "جرّب، ولو صار خطأ معين تصرّف". والـ auto_suggest=False بيمنع المكتبة من تخمين عنوان قريب، فبتجيب بالضبط اللي كتبته.
     try:
       # الـ auto_suggest=False بيمنع المكتبة من "تخمين" عنوان قريب، فبتاخد بالضبط اللي كتبته.
         return wikipedia.page(topic, auto_suggest=False)
+      # اد الخطأ بيطلع لما العنوان له أكتر من معنى. الـ e بيحمل تفاصيل الخطأ.
     except wikipedia.exceptions.DisambiguationError as e:
         # The topic has multiple meanings — just take the first suggestion
         print(f"⚠️ '{topic}' is ambiguous in '{lang}', using: {e.options[0]}")
