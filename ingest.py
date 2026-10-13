@@ -33,8 +33,15 @@ def _patched_wiki_request(params):
         params["action"] = "query"
       # المكتبة بتخزن عنوان الـ API بمتغير اسمه API_URL (مثلاً http://ar.wikipedia.org/w/api.php). بنقرأه وبنبدّل http بـ https عشان الاتصال يكون آمن.
     url = wikipedia.wikipedia.API_URL.replace("http://", "https://")
+  """هون الطلب الفعلي:
+get: نوع الطلب (جيب بيانات).
+params: بتتحول لجزء من الرابط (?titles=...&format=json).
+timeout=20: إذا ما رد السيرفر خلال 20 ثانية، بنوقف بدل ما يعلق للأبد.
+"""
     response = _session.get(url, params=params, timeout=20)
+# إذا كان الرد خطأ (مثل 429 أو 500)، بترمي خطأ واضح. بدونها كان الكود بيكمل ويحاول يقرأ رد فاضي، وبيطلع الخطأ الغامض JSONDecodeError.
     response.raise_for_status()
+# بتحوّل الرد النصي لقاموس بايثون وبترجعه للمكتبة.
     return response.json()
 wikipedia.wikipedia._wiki_request = _patched_wiki_request
 # --- end patch ---
