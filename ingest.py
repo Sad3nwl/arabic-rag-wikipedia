@@ -43,6 +43,7 @@ timeout=20: إذا ما رد السيرفر خلال 20 ثانية، بنوقف 
     response.raise_for_status()
 # بتحوّل الرد النصي لقاموس بايثون وبترجعه للمكتبة.
     return response.json()
+# هاد "الترقيع" نفسه. المكتبة عندها دالة داخلية اسمها _wiki_request بتستخدمها لكل طلب، وإحنا بنبدّلها بدالتنا. لاحظ إنه ما في أقواس بعد _patched_wiki_request: بنخزّن الدالة نفسها، مش بننادي عليها.
 wikipedia.wikipedia._wiki_request = _patched_wiki_request
 # --- end patch ---
 """بتجرب تجيب موضوع واحد بلغة واحدة، وفي ٣ احتمالات:
@@ -50,6 +51,7 @@ wikipedia.wikipedia._wiki_request = _patched_wiki_request
 نجحت: بترجع المقالة.
 الاسم له أكتر من معنى: بتاخد أول اقتراح.
 المقالة مش موجودة: بترجع None وما بتكسّر البرنامج."""
+# بتاخد موضوع ولغة. الـ : str تلميح للقارئ عن نوع القيمة (ما بيأثر على التنفيذ).
 def _fetch_single_page(topic: str, lang: str):
     """
     Tries to fetch one article in one language.
