@@ -14,7 +14,7 @@ import requests
 import wikipedia
 from langchain.schema import Document
 from Config import WIKI_LANGS
-
+# بننشئ "جلسة" وحدة تُستخدم لكل الطلبات. فايدتها إنها بتعيد استخدام نفس الاتصال (أسرع)، وبتخلينا نحدد إعدادات مرة وحدة. الـ _ بأول الاسم معناها "للاستخدام الداخلي بهاد الملف".
 _session = requests.Session()
 _session.headers.update({
     "User-Agent": "arabic-rag-wikipedia/1.0 (contact: you@example.com)",
@@ -60,7 +60,7 @@ def fetch_wikipedia_pages(topics: list[str], langs: list[str] = WIKI_LANGS) -> l
     for topic in topics:
         page = None
         used_lang = None
-
+# بتلف على كل موضوع، وبتجرب اللغات بالترتيب لحد ما تلاقي مقالة:
         for lang in langs:
             page = _fetch_single_page(topic, lang)
             if page is not None:
