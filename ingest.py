@@ -42,6 +42,7 @@ def _fetch_single_page(topic: str, lang: str):
     """
     wikipedia.set_lang(lang)
     try:
+      # الـ auto_suggest=False بيمنع المكتبة من "تخمين" عنوان قريب، فبتاخد بالضبط اللي كتبته.
         return wikipedia.page(topic, auto_suggest=False)
     except wikipedia.exceptions.DisambiguationError as e:
         # The topic has multiple meanings — just take the first suggestion
