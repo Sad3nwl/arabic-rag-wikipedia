@@ -16,6 +16,10 @@ from langchain.schema import Document
 from Config import WIKI_LANGS
 # بننشئ "جلسة" وحدة تُستخدم لكل الطلبات. فايدتها إنها بتعيد استخدام نفس الاتصال (أسرع)، وبتخلينا نحدد إعدادات مرة وحدة. الـ _ بأول الاسم معناها "للاستخدام الداخلي بهاد الملف".
 _session = requests.Session()
+"""بنضيف معلومات بتنرسل مع كل طلب:
+User-Agent: بيعرّف ويكيبيديا مين اللي عم يطلب. هي بتطلب تعريف واضح، وهون فيه إيميل وهمي (you@example.com) والأفضل تحط رابط الريبو بدله.
+Accept: application/json: بنقول للسيرفر "بدي الرد بصيغة JSON"
+"""
 _session.headers.update({
     "User-Agent": "arabic-rag-wikipedia/1.0 (contact: you@example.com)",
     "Accept": "application/json",
