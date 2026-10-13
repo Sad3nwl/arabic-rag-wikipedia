@@ -5,6 +5,11 @@ to refresh the data):
   2. Split them into small chunks          <- added in the next step
   3. Turn chunks into embeddings & store   <- added later
 """
+"""requests: لإرسال طلبات للإنترنت.
+wikipedia: المكتبة اللي بتجيب المقالات.
+Document: القالب الموحّد اللي بيفهمه LangChain (نص + معلومات عنه).
+WIKI_LANGS: لستة اللغات من ملف الإعدادات (عندك ["ar"]
+"""
 import requests
 import wikipedia
 from langchain.schema import Document
