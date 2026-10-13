@@ -24,10 +24,14 @@ _session.headers.update({
     "User-Agent": "arabic-rag-wikipedia/1.0 (contact: you@example.com)",
     "Accept": "application/json",
 })
+# دالة بتاخد params (قاموس فيه تفاصيل الطلب اللي المكتبة بتبنيها، مثل عنوان المقالة).
 def _patched_wiki_request(params):
+  # بنطلب من ويكيبيديا ترد بـ JSON.
     params["format"] = "json"
+  # واجهة ويكيبيديا لازم تعرف شو العملية المطلوبة. إذا المكتبة ما حددتها، بنحط query (استعلام) كقيمة افتراضية
     if "action" not in params:
         params["action"] = "query"
+      # المكتبة بتخزن عنوان الـ API بمتغير اسمه API_URL (مثلاً http://ar.wikipedia.org/w/api.php). بنقرأه وبنبدّل http بـ https عشان الاتصال يكون آمن.
     url = wikipedia.wikipedia.API_URL.replace("http://", "https://")
     response = _session.get(url, params=params, timeout=20)
     response.raise_for_status()
