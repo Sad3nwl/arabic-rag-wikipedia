@@ -65,27 +65,40 @@ def _fetch_single_page(topic: str, lang: str):
         return wikipedia.page(topic, auto_suggest=False)
       # اد الخطأ بيطلع لما العنوان له أكتر من معنى. الـ e بيحمل تفاصيل الخطأ.
     except wikipedia.exceptions.DisambiguationError as e:
-        # The topic has multiple meanings — just take the first suggestion
+      # e.options لستة المعاني المحتملة. بنطبع تحذير وبناخد أول معنى. (الـ f قبل النص بتخلّي {topic} و{lang} تتبدل بقيمها.
         print(f"⚠️ '{topic}' is ambiguous in '{lang}', using: {e.options[0]}")
         return wikipedia.page(e.options[0], auto_suggest=False)
+      # ذا المقالة مش موجودة، بنرجّع None (يعني "ولا شي") بدل ما يكسّر البرنامج.
     except wikipedia.exceptions.PageError:
         return None
+      """topics: لستة المواضيع.
+langs: لستة اللغات، وإذا ما أعطيتها قيمة بتاخد WIKI_LANGS تلقائياً.
+-> list[Document]: بترجع لستة Document.
+"""
 def fetch_wikipedia_pages(topics: list[str], langs: list[str] = WIKI_LANGS) -> list[Document]:
     """
     Takes a list of topics and returns a list of LangChain Documents.
     For each topic, tries the languages in `langs` in order (e.g. ["ar", "en"]) and
     stops at the first language where the article actually exists.
     """
+# لستة فاضية رح نعبيها بالنتائج.
     documents: list[Document] = []
+# ببنلف على كل موضوع، ولكل موضوع بنصفّر المتغيرين: page (المقالة) وused_lang (اللغة اللي نجحت).
     for topic in topics:
         page = None
         used_lang = None
-# بتلف على كل موضوع، وبتجرب اللغات بالترتيب لحد ما تلاقي مقالة:
+"""لوب داخلي على اللغات بالترتيب:
+
+بنجرب اللغة الأولى.
+إذا رجعت مقالة (is not None)، بنسجّل اللغة وبنوقف اللوب بـ break.
+إذا فشلت، بنجرب اللغة اللي بعدها.
+"""
         for lang in langs:
             page = _fetch_single_page(topic, lang)
             if page is not None:
                 used_lang = lang
                 break
+              # إذا جرّبنا كل اللغات وما لقينا شي، بنطبع رسالة وبنعمل continue: يعني "اترك هاد الموضوع وانتقل للي بعده".
         if page is None:
             print(f"❌ No article found for '{topic}' in any of {langs}")
             continue
