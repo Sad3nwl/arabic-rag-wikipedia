@@ -7,10 +7,10 @@ import os
 # ============ General settings ============
 # اسم المجلد اللي بتنحفظ فيه قاعدة البيانات على جهازك. أول ما تبني القاعدة بيتعمل مجلد بهالاسم جنب المشروع، وإذا بدك تبدأ من الصفر بتمسحه.
 PERSIST_DIR = "chroma_db"
-# Name of the collection inside the Chroma database
+# اسم "الجدول" جوا قاعدة Chroma. لازم يكون نفسه عند البناء وعند التحميل، وإلا ما بتوصل لنفس البيانات.
 COLLECTION_NAME = "wikipedia_rag"
 # ============ Chunking settings ============
-# Size of each text chunk (roughly in characters)
+# الحد الأقصى لحجم كل جزء من المقالة، تقريباً 800 حرف
 CHUNK_SIZE = 800
 # Overlap between consecutive chunks, so we don't lose context at chunk boundaries
 CHUNK_OVERLAP = 100
