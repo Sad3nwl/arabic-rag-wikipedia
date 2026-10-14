@@ -3,6 +3,7 @@ turns text chunks into embeddings (numeric
 vectors that represent meaning, computed locally for free), and stores them in a local Chroma
 vector database so they can be searched later.
 """
+# القالب الموحّد (نص + معلومات عنه). هون بنستخدمه بس كـ تلميح (list[Document]) لنوضح شو نوع المدخلات.
 from langchain.schema import Document
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
