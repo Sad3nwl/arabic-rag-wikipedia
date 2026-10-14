@@ -16,7 +16,10 @@ CHUNK_SIZE = 800
 CHUNK_OVERLAP = 100
 # ============ Model settings ============
 # Embedding model: turns text into a numeric vector representing its meaning.
-# Runs locally on your machine (free, no API key). This model supports Arabic.
+"""اسم النموذج اللي بيحوّل النص لأرقام تمثل معناه. الاسم مقسوم:
+sentence-transformers/: الجهة اللي نشرته.
+paraphrase-multilingual: بيفهم لغات كتير، بينها العربي.
+MiniLM-L12-v2: حجمه صغير وسريع."""
 # NOTE: if you change it, delete the chroma_db folder and rebuild the database.
 EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 # LLM used to generate the final answer (served by Groq, free tier)
