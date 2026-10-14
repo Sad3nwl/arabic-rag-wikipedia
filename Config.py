@@ -32,6 +32,7 @@ RETRIEVER_TOP_K = 4
 # Arabic only — no fallback to English. If a topic doesn't exist in Arabic,
 # it will simply be skipped (see the "No article found" message in ingest.py).
 WIKI_LANGS = ["ar"]
+# بتعرّف دالة جديدة اسمها check_api_key وما بتاخد أي مدخلات. بتنفّذ بس لما ينادي عليها أحد (rag_chain.py بينادي عليها).
 def check_api_key():
     """
     Make sure the Groq API key is set before running anything that needs the LLM.
