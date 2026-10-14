@@ -2,6 +2,7 @@
 Central configuration shared across the RAG pipeline (ingestion, retrieval, generation).
 Keeping everything in one place makes it much easier to tweak and experiment.
 """
+# مكتبة بايثون الجاهزة للتعامل مع نظام التشغيل. استخدمناها بس عشان نقرا متغيرات البيئة (مفتاح Groq) بآخر الملف.
 import os
 # ============ General settings ============
 # Local directory where the persistent vector store (Chroma) is saved
