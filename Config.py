@@ -38,8 +38,16 @@ def check_api_key():
     Make sure the Groq API key is set before running anything that needs the LLM.
     Get a free key at https://console.groq.com/keys
     """
+    """os.environ هو قاموس بمتغيرات البيئة الموجودة بجهازك.
+.get("GROQ_API_KEY") بيدور على متغير بهالاسم. إذا ما لقاه بيرجّع None.
+not بتقلب النتيجة، فالشرط معناه: "إذا ما في مفتاح"."""
     if not os.environ.get("GROQ_API_KEY"):
+        # raise بتوقف البرنامج وبتطلّع خطأ من نوع EnvironmentError (خطأ بإعدادات البيئة)
         raise EnvironmentError(
             "You must set the GROQ_API_KEY environment variable (e.g. in your .env file).\n"
             "Get a free key at https://console.groq.com/keys"
         )
+        """كيف بيوصل المفتاح للدالة؟
+الدالة بتقرا متغير بيئة، بس ملف Config.py نفسه ما بيقرا ملف .env. اللي بيقراه هو load_dotenv() بأول app.py، وبيحمّل محتوى 
+.env لمتغيرات البيئة قبل ما أحد ينادي على check_api_key().
+وعلى Streamlit Cloud، الـ Secrets اللي بتحطها بالإعدادات بتتحول لمتغيرات بيئة، فنفس الدالة بتشتغل هناك."""
