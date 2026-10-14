@@ -24,9 +24,9 @@ MiniLM-L12-v2: حجمه صغير وسريع."""
 EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 # اسم النموذج اللي بيكتب الجواب النهائي، وهو شغّال عند Groq. Groq بتسحب موديلات من وقت للتاني (متل ما صار مع الموديل الأول)، فإذا طلع خطأ model_not_found، هاد السطر الوحيد اللي بتغيّره.
 LLM_MODEL = "openai/gpt-oss-120b"
-# Lower temperature = answers stick closer to the retrieved sources (less "creative")
+# درجة "الإبداع" من 0 لـ 1. كل ما قرّبت من الصفر، كان الجواب أكتر التزاماً بالنص. وبالـ RAG بدنا دقة، فاخترنا رقم صغير.
 LLM_TEMPERATURE = 0.2
-# Number of chunks the retriever returns to build the answer from
+# عدد الأجزاء اللي بنجيبها لكل سؤال. أقل من هيك ممكن تفوتنا معلومة، وأكتر ممكن يتلخبط النموذج بمعلومات مش مرتبطة.
 RETRIEVER_TOP_K = 4
 # Wikipedia languages to try, in priority order.
 # Arabic only — no fallback to English. If a topic doesn't exist in Arabic,
