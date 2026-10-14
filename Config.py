@@ -22,7 +22,7 @@ paraphrase-multilingual: بيفهم لغات كتير، بينها العربي.
 MiniLM-L12-v2: حجمه صغير وسريع."""
 # NOTE: if you change it, delete the chroma_db folder and rebuild the database.
 EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-# LLM used to generate the final answer (served by Groq, free tier)
+# اسم النموذج اللي بيكتب الجواب النهائي، وهو شغّال عند Groq. Groq بتسحب موديلات من وقت للتاني (متل ما صار مع الموديل الأول)، فإذا طلع خطأ model_not_found، هاد السطر الوحيد اللي بتغيّره.
 LLM_MODEL = "openai/gpt-oss-120b"
 # Lower temperature = answers stick closer to the retrieved sources (less "creative")
 LLM_TEMPERATURE = 0.2
