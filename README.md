@@ -1,4 +1,4 @@
-<h1 align="right">Arabic RAG over Wikipedia</h1>
+<h1 align="left">Arabic RAG over Wikipedia</h1>
 <p align="center">
   Ask questions about Arabic Wikipedia articles and get answers grounded in the source text, with a link to every article used.
 </p>
