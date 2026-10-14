@@ -5,7 +5,7 @@ Keeping everything in one place makes it much easier to tweak and experiment.
 # مكتبة بايثون الجاهزة للتعامل مع نظام التشغيل. استخدمناها بس عشان نقرا متغيرات البيئة (مفتاح Groq) بآخر الملف.
 import os
 # ============ General settings ============
-# Local directory where the persistent vector store (Chroma) is saved
+# اسم المجلد اللي بتنحفظ فيه قاعدة البيانات على جهازك. أول ما تبني القاعدة بيتعمل مجلد بهالاسم جنب المشروع، وإذا بدك تبدأ من الصفر بتمسحه.
 PERSIST_DIR = "chroma_db"
 # Name of the collection inside the Chroma database
 COLLECTION_NAME = "wikipedia_rag"
