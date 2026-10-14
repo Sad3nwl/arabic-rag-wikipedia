@@ -12,7 +12,7 @@ COLLECTION_NAME = "wikipedia_rag"
 # ============ Chunking settings ============
 # الحد الأقصى لحجم كل جزء من المقالة، تقريباً 800 حرف
 CHUNK_SIZE = 800
-# Overlap between consecutive chunks, so we don't lose context at chunk boundaries
+# كل جزء بياخد آخر 100 حرف من الجزء اللي قبله. فايدة التداخل إنه جملة مهمة ما بتنقطع نص نص وتضيع بين جزئين.
 CHUNK_OVERLAP = 100
 # ============ Model settings ============
 # Embedding model: turns text into a numeric vector representing its meaning.
