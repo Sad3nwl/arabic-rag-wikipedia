@@ -3,12 +3,22 @@
 relevant chunks from the vector store, then pass them to an LLM along
 with the question so it can generate a grounded answer.
 """
+# الأداة اللي بتتواصل مع نماذج Groq (الـ LLM اللي بيكتب الجواب).
 from langchain_groq import ChatGroq
+# "سلسلة" جاهزة من LangChain بتربط البحث مع الـ LLM تلقائياً، فما بنكتب المنطق بإيدينا.
 from langchain.chains import RetrievalQA
+# قالب بنحط فيه التعليمات اللي بنرسلها للنموذج مع كل سؤال.
 from langchain.prompts import PromptTemplate
+# بنجيب من Config.py: اسم الموديل، درجة الإبداع، عدد الأجزاء اللي بنجيبها، ودالة فحص المفتاح.
 from Config import LLM_MODEL, LLM_TEMPERATURE, RETRIEVER_TOP_K, check_api_key
 # The prompt tells the LLM exactly how to behave: answer ONLY from the
 # provided context, and admit it when the answer isn't there.
+"""هاد نص خام (مش كود بيتنفذ)، وله ٣ أجزاء:
+التعليمات: "جاوب بس من السياق اللي تحت، ولو الجواب مش موجود قول إنه ما عندك معلومات كافية ولا تخترع". هاد أهم سطر بالمشروع لأنه بيقلل الـ hallucination.
+{context}: فراغ رح يتعبّى بالأجزاء اللي بيجيبها الـ retriever.
+{question}: فراغ رح يتعبّى بسؤال المستخدم.
+Answer: بنختم فيها عشان النموذج يكمّل بعدها بالجواب.
+(تلات علامات تنصيص) بتسمح بنص على أكتر من سطر."""
 PROMPT_TEMPLATE = """You are a helpful assistant that answers questions using
 ONLY the context provided below. If the answer isn't in the context, say you
 don't have enough information — do not make anything up.
