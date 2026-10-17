@@ -38,10 +38,17 @@ def build_rag_chain(vectorstore):
     llm = ChatGroq(model=LLM_MODEL, temperature=LLM_TEMPERATURE)
  # تحوّل القاعدة لـ "باحث" (retriever): بياخد سؤال وبيرجع أقرب k أجزاء إله. k هون 4. والقاموس {"k": ...} هو طريقة تمرير الإعداد.
     retriever = vectorstore.as_retriever(search_kwargs={"k": RETRIEVER_TOP_K})
+ # تحوّل النص الخام لقالب رسمي. input_variables بتعلن إنه القالب فيه فراغين بس: context وquestion.
     prompt = PromptTemplate(
         template=PROMPT_TEMPLATE,
         input_variables=["context", "question"],
     )
+ """أهم سطر بالملف. هون بنجمع كل القطع:
+llm=llm: مين بيكتب الجواب.
+chain_type="stuff": "احشر كل الأجزاء المسترجعة دفعة وحدة بمكان {context}". أبسط طريقة، ومناسبة لـ 4 أجزاء.
+retriever=retriever: مين بيدوّر.
+return_source_documents=True: رجّعلنا كمان الأجزاء اللي استخدمتها، عشان نعرض المصادر.
+chain_type_kwargs={"prompt": prompt}: استخدم قالبنا مش القالب الافتراضي."""
     chain = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type="stuff",
