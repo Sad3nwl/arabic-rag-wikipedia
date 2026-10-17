@@ -26,11 +26,13 @@ Context:
 {context}
 Question: {question}
 Answer:"""
+# بتاخد قاعدة البيانات الجاهزة (الناتجة من vectorstore.py)، وبترجع "سلسلة" تقدر تسألها أسئلة.
 def build_rag_chain(vectorstore):
     """
     Builds a question-answering chain on top of an existing vectorstore.
     Returns a chain object with a `.invoke({"query": ...})` method.
     """
+ # بتتأكد إنه GROQ_API_KEY موجود. لو مش موجود بتوقف فوراً برسالة واضحة، بدل خطأ غامض لاحقاً.
     check_api_key()
     llm = ChatGroq(model=LLM_MODEL, temperature=LLM_TEMPERATURE)
     retriever = vectorstore.as_retriever(search_kwargs={"k": RETRIEVER_TOP_K})
