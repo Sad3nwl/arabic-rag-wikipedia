@@ -34,7 +34,9 @@ def build_rag_chain(vectorstore):
     """
  # بتتأكد إنه GROQ_API_KEY موجود. لو مش موجود بتوقف فوراً برسالة واضحة، بدل خطأ غامض لاحقاً.
     check_api_key()
+ # بتجهّز نموذج الجواب: الاسم من LLM_MODEL (عندك openai/gpt-oss-120b)، والحرارة 0.2 يعني محافظ وملتزم بالنص. لسا ما أرسلنا أي سؤال، هاد تجهيز.
     llm = ChatGroq(model=LLM_MODEL, temperature=LLM_TEMPERATURE)
+ # تحوّل القاعدة لـ "باحث" (retriever): بياخد سؤال وبيرجع أقرب k أجزاء إله. k هون 4. والقاموس {"k": ...} هو طريقة تمرير الإعداد.
     retriever = vectorstore.as_retriever(search_kwargs={"k": RETRIEVER_TOP_K})
     prompt = PromptTemplate(
         template=PROMPT_TEMPLATE,
