@@ -57,12 +57,15 @@ chain_type_kwargs={"prompt": prompt}: استخدم قالبنا مش القال�
         chain_type_kwargs={"prompt": prompt},
     )
     return chain
+# بتاخد السلسلة والسؤال، وبترجع dict (قاموس) فيه الجواب والمصادر
 def ask(chain, question: str) -> dict:
     """
     Asks a question through the chain and returns a clean dict with
     the answer text and the list of sources it was based on.
     """
+ # هاد السطر الوحيد اللي بيشغّل كل شي: بحث ← تعبئة القالب ← إرسال لـ Groq ← استلام الجواب. والمفتاح "query" هو الاسم اللي بتتوقعه RetrievalQA لسؤالك. والنتيجة بتجي قاموس فيه "result" (الجواب) و"source_documents" (الأجزاء).
     result = chain.invoke({"query": question})
+ # هاد اسمه list comprehension: بيلف على كل جزء استُخدم، وبيسحب منه بس العنوان والرابط من الـ metadata (اللي حطيناها بـ ingest.py)، وبيعملهم لستة قواميس نظيفة. و.get(...) أأمن من [...] لأنها بترجع None بدل ما تكسّر لو المفتاح ناقص.
     sources = [
         {"title": doc.metadata.get("source"), "url": doc.metadata.get("url")}
         for doc in result["source_documents"]
@@ -70,3 +73,4 @@ def ask(chain, question: str) -> dict:
     return {
         "answer": result["result"],
         "sources": sources, }
+# . اللي بيعرّف جودة الجواب هو الأجزاء المسترجعة. لو سؤال طلع جوابه ناقص، غالباً المشكلة بالبحث (الجزء المناسب ما انجاب) مش بالنموذج. وقتها بتزيد RETRIEVER_TOP_K من 4 لـ 6 بـ Config.py
