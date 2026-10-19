@@ -11,8 +11,11 @@ load_dotenv()
 from Config import PERSIST_DIR
 # fetch_wikipedia_pages: جلب المقالات.
 from ingest import fetch_wikipedia_pages
+# split_documents: التقطيع.
 from chunking import split_documents
+# build_vectorstore وload_vectorstore: بناء القاعدة أو فتح الموجودة.
 from vectorstore import build_vectorstore, load_vectorstore
+# build_rag_chain وask: تجهيز السلسلة وسؤالها.
 from Ragchain import build_rag_chain, ask
 # ---------- Page setup ----------
 st.set_page_config(page_title="Wikipedia RAG", page_icon="📖", layout="centered")
