@@ -121,8 +121,11 @@ st.expander بيعمل قسم قابل للطي.
 if st.session_state.chain is None:
     st.info("Build a knowledge base from the sidebar to start asking questions.")
 else:
+    # مربع كتابة مثبّت أسفل الصفحة. بترجع نص السؤال لما تضغط Enter، وغير هيك None.
     question = st.chat_input("Ask a question...")
+    # ذا في سؤال جديد، بنعرضه فوراً بفقاعة المستخدم.
     if question:
+        # بنفتح فقاعة المساعد، وبنسأل السلسلة. الدوّامة بتظهر طول ما هو بيفكر.
         with st.chat_message("user"):
             st.markdown(question)
         with st.chat_message("assistant"):
@@ -130,14 +133,24 @@ else:
                 with st.spinner("Thinking..."):
                     result = ask(st.session_state.chain, question)
                 # The same article can appear several times (several chunks), so de-duplicate
+                # سطر ذكي لإزالة التكرار. نفس المقالة ممكن تطلع بأكتر من جزء، فالمصدر بيتكرر. هاد dictionary comprehension: بيعمل قاموس مفتاحه الرابط، وإذا تكرر نفس الرابط بيكتب فوق القديم، فبيضل مصدر واحد لكل رابط. بعدين .values() بتجيب القيم وlist بتحوّلها للستة.
                 unique_sources = list({s["url"]: s for s in result["sources"]}.values())
+                # بنعرض الجواب، وتحته قائمة المصادر القابلة للطي.
                 st.markdown(result["answer"])
                 with st.expander("Sources"):
                     for s in unique_sources:
                         st.markdown(f"- [{s['title']}]({s['url']})")
+                        # بنحفظ السؤال والجواب بالذاكرة. هيك لما الصفحة تعيد التشغيل مع السؤال الجاي، الحلقة اللي فوق بترسمهم من جديد.
                 st.session_state.messages.append({"role": "user", "content": question})
                 st.session_state.messages.append(
                     {"role": "assistant", "content": result["answer"], "sources": unique_sources}
                 )
+                # أي خطأ (مثل 404 للموديل أو 429) بيظهر بصندوق أحمر.
             except Exception as e:
                 st.error(f"Couldn't get an answer: {e}")
+#                 سلسل اللي بيصير لما تسأل سؤال
+# بتكتب السؤال وبتضغط Enter.
+# الملف كله بيعيد التشغيل من الأول.
+# الحلقة بترسم المحادثة القديمة من الذاكرة.
+# st.chat_input بترجع السؤال الجديد، فبيتعرض السؤال، وبيتسأل النموذج، وبيتعرض الجواب.
+# السؤال والجواب بيتحفظوا بالذاكرة للتشغيل الجاي.
