@@ -1,9 +1,15 @@
+# os: للتعامل مع الملفات والمجلدات (بنستخدمها لنفحص إذا مجلد القاعدة موجود).
 import os
+# streamlit as st: مكتبة الواجهة. as st اختصار عشان نكتب st.title بدل streamlit.title.
 import streamlit as st
+# load_dotenv: دالة بتقرا ملف .env وبتحوّل محتواه لمتغيرات بيئة.
 from dotenv import load_dotenv
 # Load GROQ_API_KEY from a local .env file (if there is one)
+# بتنفّذ القراءة فعلياً. لازم تيجي قبل استيراد ملفات المشروع، لأنه check_api_key بتدور على المفتاح بمتغيرات البيئة. إذا ما في ملف .env (مثل ما بالاستضافة)، ما بتكسّر، وبتاخد المفتاح من الـ Secrets.
 load_dotenv()
+# PERSIST_DIR: اسم مجلد القاعدة.
 from Config import PERSIST_DIR
+# fetch_wikipedia_pages: جلب المقالات.
 from ingest import fetch_wikipedia_pages
 from chunking import split_documents
 from vectorstore import build_vectorstore, load_vectorstore
