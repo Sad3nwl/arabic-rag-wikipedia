@@ -21,6 +21,11 @@ from Ragchain import build_rag_chain, ask
 # بتحدد عنوان التبويب بالمتصفح، وأيقونته، وشكل التخطيط (centered يعني المحتوى بنص الشاشة). لازم تكون أول أمر Streamlit بالملف، وإلا بيطلع خطأ.
 st.set_page_config(page_title="Wikipedia RAG", page_icon="📖", layout="centered")
 # Make chat messages render right-to-left so Arabic text looks right
+"""حقن CSS صغير بالصفحة:
+[data-testid="stChatMessage"]: بيستهدف فقاعات الشات.
+direction: rtl: اتجاه الكتابة من اليمين لليسار.
+text-align: right: محاذاة لليمين.
+unsafe_allow_html=True: بدونها Streamlit بيعرض الوسم كنص عادي بدل ما ينفّذه."""
 st.markdown(
     """
     <style>
@@ -29,7 +34,10 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
+"""أهم فكرة بـ Streamlit: كل ما تضغط زر أو تكتب سؤال، الملف كله بيعيد التشغيل من الأول للآخر. فأي متغير عادي بيضيع. أما st.session_state فهو "ذاكرة" بتضل بين التشغيلات.
+chain: السلسلة الجاهزة (فاضية None بالبداية).
+messages: لستة المحادثة (فاضية بالبداية).
+الشرط if ... not in بيمنع إعادة تصفيرهم كل مرة، فبنعمل القيمة الأولية بس أول مرة."""
 if "chain" not in st.session_state:
     st.session_state.chain = None
 if "messages" not in st.session_state:
