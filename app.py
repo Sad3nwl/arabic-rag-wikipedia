@@ -18,6 +18,7 @@ from vectorstore import build_vectorstore, load_vectorstore
 # build_rag_chain وask: تجهيز السلسلة وسؤالها.
 from Ragchain import build_rag_chain, ask
 # ---------- Page setup ----------
+# بتحدد عنوان التبويب بالمتصفح، وأيقونته، وشكل التخطيط (centered يعني المحتوى بنص الشاشة). لازم تكون أول أمر Streamlit بالملف، وإلا بيطلع خطأ.
 st.set_page_config(page_title="Wikipedia RAG", page_icon="📖", layout="centered")
 # Make chat messages render right-to-left so Arabic text looks right
 st.markdown(
