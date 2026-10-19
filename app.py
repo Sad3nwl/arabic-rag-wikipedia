@@ -65,28 +65,38 @@ with st.sidebar:
     )
     # st.button بترجع True بس بالتشغيل اللي بعد الضغط مباشرة. type="primary" بيخلي الزر ملوّن.
     if st.button("Build knowledge base", type="primary"):
+        """بيحوّل النص للستة مواضيع:
+splitlines() بيقسم النص لأسطر.
+t.strip() بيشيل المسافات من أطراف كل سطر.
+if t.strip() بيتجاهل الأسطر الفاضية"""
         topics = [t.strip() for t in topics_text.splitlines() if t.strip()]
-
+# إذا اللستة فاضية بيطلع تحذير. غير هيك بنكمل.
         if not topics:
             st.warning("Please enter at least one topic.")
         else:
             try:
+                # st.spinner بيعرض دوّامة تحميل ورسالة طول ما الكود اللي جواه شغّال. هون بنجيب المقالات.
                 with st.spinner("Fetching articles from Wikipedia..."):
                     docs = fetch_wikipedia_pages(topics)
-
+# إذا ما انجابت ولا مقالة، رسالة خطأ. وإلا بنكمل.
                 if not docs:
                     st.error("No articles were found for these topics.")
                 else:
+                    # بنقطّع، وبعدين بنحوّل لأرقام وبنخزّن. الخطوة التانية هي الأبطأ، خصوصاً أول مرة (تحميل النموذج).
                     with st.spinner("Splitting articles into chunks..."):
                         chunks = split_documents(docs)
 
                     with st.spinner("Creating embeddings and storing them..."):
                         vectorstore = build_vectorstore(chunks)
+                        """بنبني السلسلة وبنخزنها بالذاكرة.
+بنفضّي المحادثة القديمة (لأنه القاعدة تغيّرت).
+بنعرض رسالة نجاح بعدد المقالات والأجزاء."""
                     st.session_state.chain = build_rag_chain(vectorstore)
                     st.session_state.messages = []
                     st.success(f"Indexed {len(docs)} article(s) into {len(chunks)} chunks.")
             except Exception as e:
                 st.error(f"Something went wrong: {e}")
+                # سطر صغير توضيحي، وخط فاصل، وسطر اسمك. (هدول جوا الـ with st.sidebar فبيظهروا بالشريط الجانبي.)
     st.caption("New topics are added to the existing database, not replaced.")
     st.divider()
     st.caption("This project was made by Sadeen Abdelalrahman.")
@@ -95,13 +105,19 @@ st.title("📖 Wikipedia RAG")
 st.caption("Ask questions and get answers grounded in the Wikipedia articles you indexed.")
 st.caption("Made by Sadeen Abdelalrahman(sad3nwl)")
 # Show the conversation so far
+# بنلف على كل رسالة محفوظة.
 for msg in st.session_state.messages:
+    # بيرسم فقاعة شات. msg["role"] إما "user" أو "assistant"، وStreamlit بيحط أيقونة مناسبة لكل واحد.
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
+        """msg.get("sources") بترجع None لرسائل المستخدم (ما فيها مصادر)، فالشرط ما بيتحقق.
+st.expander بيعمل قسم قابل للطي.
+لكل مصدر بنكتب سطر ماركداون على شكل رابط: - [العنوان](الرابط)."""
         if msg.get("sources"):
             with st.expander("Sources"):
                 for s in msg["sources"]:
                     st.markdown(f"- [{s['title']}]({s['url']})")
+                    # إذا ما في سلسلة جاهزة، بنعرض رسالة بتقول "ابنِ القاعدة أول". وإلا بنعرض الشات.
 if st.session_state.chain is None:
     st.info("Build a knowledge base from the sidebar to start asking questions.")
 else:
