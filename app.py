@@ -43,14 +43,21 @@ if "chain" not in st.session_state:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 # If a database was already built in a previous run, load it automatically
+"""٣ شروط لازم تتحقق مع بعض:
+ما في سلسلة جاهزة بعد.
+مجلد chroma_db موجود (isdir).
+المجلد مش فاضي (os.listdir بترجع لستة، واللستة الفاضية بتعتبر False)."""
 if st.session_state.chain is None and os.path.isdir(PERSIST_DIR) and os.listdir(PERSIST_DIR):
+    # بنفتح القاعدة الموجودة (load_vectorstore) وبنبني السلسلة فوقها، وبنخزنها بالذاكرة. إذا صار أي خطأ (مثل خطأ الذاكرة os error 1455 اللي طلع معك)، بيعرض تحذير بدل ما يكسّر الصفحة كلها.
     try:
         st.session_state.chain = build_rag_chain(load_vectorstore())
     except Exception as e:
         st.warning(f"Found an existing database but couldn't load it: {e}")
 # ---------- Sidebar: build the knowledge base ----------
+# كل سطر مزاح جواها بيظهر بالشريط الجانبي.
 with st.sidebar:
     st.header("📚 Knowledge base")
+    # مربع نص متعدد الأسطر. value هو النص اللي بيظهر مسبقاً (الموضوع الافتراضي عندك)، وheight ارتفاعه بالبكسل. اللي بتكتبه بيتخزّن بـ topics_text.
     topics_text = st.text_area(
         "Wikipedia topics (one per line)",
         value="كريستيانو رونالدو",
