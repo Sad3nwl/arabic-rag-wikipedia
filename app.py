@@ -63,7 +63,7 @@ with st.sidebar:
         value="كريستيانو رونالدو",
         height=150,
     )
-    
+    # st.button بترجع True بس بالتشغيل اللي بعد الضغط مباشرة. type="primary" بيخلي الزر ملوّن.
     if st.button("Build knowledge base", type="primary"):
         topics = [t.strip() for t in topics_text.splitlines() if t.strip()]
 
