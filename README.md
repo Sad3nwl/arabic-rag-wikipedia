@@ -2,7 +2,6 @@
 <p align="center">
   Ask questions about Arabic Wikipedia articles and get answers grounded in the source text, with a link to every article used.
 </p>
-
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
   <img src="https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white" alt="LangChain" />
