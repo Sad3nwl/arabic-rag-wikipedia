@@ -13,9 +13,7 @@
   <img src="https://img.shields.io/badge/Wikipedia-000000?style=for-the-badge&logo=wikipedia&logoColor=white" alt="Wikipedia" />
 </p>
 A step-by-step **Retrieval-Augmented Generation (RAG)** app that fetches Arabic Wikipedia articles, chunks and embeds them, stores them in a Chroma vector database, and answers questions through a Streamlit chat interface. Every answer comes with links to the Wikipedia articles it was based on.
-
 Built with **LangChain**, **Chroma**, **Streamlit**, local **Hugging Face embeddings**, and an LLM served by **Groq** (free tier, no credit card).
-
 <!-- Add a screenshot of the app here:
 ![App screenshot](docs/screenshot.png)
 -->
