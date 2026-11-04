@@ -51,16 +51,13 @@ Built with **LangChain**, **Chroma**, **Streamlit**, local **Hugging Face embedd
  Question ──► Retriever ──► LLM (Groq) ──► Answer + sources
  (app.py)    (top 4 chunks)  (rag_chain.py)
 ```
-
 1. **Ingest:** fetch full articles from Wikipedia as LangChain `Document`s.
 2. **Chunk:** split each article into ~800-character pieces with 100 characters of overlap.
 3. **Embed:** turn each chunk into a vector that represents its meaning.
 4. **Store:** save the vectors in a local Chroma database.
 5. **Retrieve:** embed the question and find the closest chunks.
 6. **Generate:** give the chunks and the question to the LLM and ask it to answer using only that context.
-
 ## Tech stack
-
 | | Technology | Role in the project |
 |---|---|---|
 | <img src="https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python" /> | **Python** | Programming language |
