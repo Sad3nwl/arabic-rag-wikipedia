@@ -17,7 +17,6 @@ Built with **LangChain**, **Chroma**, **Streamlit**, local **Hugging Face embedd
 <!-- Add a screenshot of the app here:
 ![App screenshot](docs/screenshot.png)
 -->
-
 ## Table of contents
 
 - [Features](#features)
