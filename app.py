@@ -1,6 +1,7 @@
 # os: للتعامل مع الملفات والمجلدات (بنستخدمها لنفحص إذا مجلد القاعدة موجود).
 import os
 # streamlit as st: مكتبة الواجهة. as st اختصار عشان نكتب st.title بدل streamlit.title.
+# 
 import streamlit as st
 # load_dotenv: دالة بتقرا ملف .env وبتحوّل محتواه لمتغيرات بيئة.
 from dotenv import load_dotenv
